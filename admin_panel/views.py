@@ -96,3 +96,6 @@ def customar_list(request):
 
 def total_cost(request):
      return render(request , 'admin_panel/total_cost.html')
+
+def test(request):
+    return render(request , 'admin_panel/test.html')

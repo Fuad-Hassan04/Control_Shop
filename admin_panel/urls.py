@@ -11,6 +11,7 @@ path('signout/', sign_out, name='sign_out'),
 path('user_profile/', user_profile, name='user_profile'),
 path('customar_list/', customar_list, name='customar_list'),
 path('total_cost/', total_cost, name='total_cost'),
+path('test/', test, name='test'),
 
 
 ]
