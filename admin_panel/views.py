@@ -84,12 +84,17 @@ def user_profile(request):
             'cost': c,
             'total_hishab': total_hishab
         })
+
+    name_mounth = mounth_name.objects.all()
+
+
     context = {
          'cost':cost,
-         'total_hishab':total_hishab
+         'total_hishab':total_hishab,
+         'name_mounth':name_mounth
          
     }
-    return render(request, 'admin_panel/user_profile.html') 
+    return render(request, 'admin_panel/user_profile.html',context) 
 def customar_list(request):
 
     customars = customar.objects.all()
