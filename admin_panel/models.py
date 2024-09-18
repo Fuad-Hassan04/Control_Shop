@@ -45,13 +45,19 @@ class customar_ditail(models.Model):
     def __str__(self):
         return f"{self.customer} - {self.total_amount}"
     
+
+class mounth_name(models.Model):
+    name = models.CharField(max_length=20)
+
+    
 class total_cost(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    store_rent = models.IntegerField(blank=True)
-    bill = models.IntegerField(blank=True)
-    employs_sallary = models.IntegerField(blank=True)
-    buy_product_list = models.TextField(max_length=10000,blank=True)
-    by_product_rate = models.IntegerField(blank=True)
+    name_mounth = models.ForeignKey(mounth_name, on_delete=models.CASCADE)
+    store_rent = models.IntegerField(default=0)
+    bill = models.IntegerField(default=0)
+    employs_sallary = models.IntegerField(default=0)
+    buy_product_list = models.TextField(max_length=10000,blank=True ,null=True)
+    by_product_rate = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     
 
@@ -60,7 +66,7 @@ class owed_detail(models.Model):
     owed_customer = models.ForeignKey(customar, on_delete=models.CASCADE , blank=True)
     owed_money_for_product = models.CharField(max_length=200000)
     owed_money = models.IntegerField()
-    created_at = models.DateTimeField(auto_now_add=True)
+ #   created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.owed_customer} - {self.owed_money}"

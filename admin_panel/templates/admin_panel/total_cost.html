@@ -448,7 +448,7 @@
                         
                         <div class="d-grid gap-2 col-6 mx-auto">
                             <a href="{% url 'add_customar' %}" class="w-100">
-                                <button class="btn btn-outline-secondary mb-4 w-100" type="button">Add New Customar</button>
+                                <button class="btn btn-outline-secondary mb-4 w-100" type="button">Add Last Mounth</button>
                             </a>
                         </div>
                         <!-- RIGHT -->
@@ -458,7 +458,7 @@
                         <head>
                             <meta charset="UTF-8">
                             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                            <title>Customer Page</title>
+                            
                             <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
                             <style>
                                 .full-width-btn {
@@ -507,7 +507,7 @@
                             
                                 </div>
                             </div>
-                        
+                            
                             <!-- Bootstrap Bundle with Popper -->
                             <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
                             <script>
@@ -526,8 +526,6 @@
                         
 
 
-
-
                         <div class="table-responsive">
                             <table class="table table-hover table-bordered">
                                 <thead>
@@ -537,37 +535,48 @@
                                                 <input class="form-check-input" id="hover_parent_all" type="checkbox">
                                             </div>
                                         </th>
-                                        <th scope="col">Mounthly Cost</th>
-                                        <th scope="col">Yearly Cost</th>
-
+                                        <th scope="col"> Store rent</th>
+                                        <th scope="col">Electricity Bill + Extra</th>
+                                        <th scope="col">Employ Salary</th>
+                                        <th scope="col">New Product List</th>
+                                        <th scope="col">New Product Price</th>
+                                        <th scope="col">Mounth Total Cost </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {% for costs in cost %}
-                                    <tr> 
-                                    
+                                    {% for costs in cost %}
+                                    <tr>
                                         <td>
                                             <div class="form-check form-check-primary">
                                                 <input class="form-check-input hover_child" type="checkbox">
                                             </div>
                                         </td>
-                                        <td>{{costs.store_rent}}</td>
+                                        <td>{{ costs.store_rent }}</td>
                                         <td>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                                            <span class="table-inner-text">{{customar.address}}</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+                                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                                            </svg>
+                                            <span class="table-inner-text">{{ costs.bill }}</span>
                                         </td>
-                                        <td class="text-center">{{customar.fhone}}</td>
+                                        <td class="text-center">{{ costs.employs_sallary }}</td>
                                         <td class="text-center">
-                                            <span class="badge badge-light-success">{{customar.customer_type}}</span>
+                                            <span class="badge badge-light-success">{{ costs.buy_product_list }}</span>
                                         </td>
-                                   
+                                        <td class="text-center">
+                                            <span class="badge badge-light-success">{{ costs.by_product_rate }}</span>
+                                        </td>
+                                        <td class="text-center">
+                                            <span class="badge badge-light-success">{{ cost_with_hishab }}</span>
+                                        </td>
                                     </tr>
-                                {% endfor %}
-
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>
-
+                        
 
                     </div>
 

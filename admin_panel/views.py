@@ -1,4 +1,4 @@
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect , get_object_or_404
 from .models import *
 from django.contrib.auth import authenticate , logout , login
 from .forms import CustomarForm
@@ -76,7 +76,19 @@ def sign_out(request):
      return redirect('index') 
 
 def user_profile(request):
-     
+    cost = total_cost.objects.all()
+    cost_with_hishab = []
+    for c in cost:
+        total_hishab = c.store_rent + c.bill + c.employs_sallary + c.by_product_rate
+        cost_with_hishab.append({
+            'cost': c,
+            'total_hishab': total_hishab
+        })
+    context = {
+         'cost':cost,
+         'total_hishab':total_hishab
+         
+    }
     return render(request, 'admin_panel/user_profile.html') 
 def customar_list(request):
 
@@ -94,8 +106,40 @@ def customar_list(request):
 
     return render(request , 'admin_panel/customar_list.html', context)
 
-def total_cost(request):
-     return render(request , 'admin_panel/total_cost.html')
+def total_costs(request):
+     cost = total_cost.objects.all()
+     #if cost.exists():
+        
+       # first_cost = cost.first()
+      #  store_rent = first_cost.store_rent
+       # bill = first_cost.bill
+       # employ_sallary = first_cost.employs_sallary
+      #  product_rate = first_cost.by_product_rate
+     cost_with_hishab = []
+     for c in cost:
+        total_hishab = c.store_rent + c.bill + c.employs_sallary + c.by_product_rate
+        cost_with_hishab.append({
+            'cost': c,
+            'total_hishab': total_hishab
+        })
+
+    # else:
+        
+        #total_hishab = 0
+     context={
+          'cost':cost,
+          'cost_with_hishab':cost_with_hishab
+     }
+     return render(request , 'admin_panel/total_cost.html' , context)
 
 def test(request):
+
     return render(request , 'admin_panel/test.html')
+
+def customar_detail_by_modal(request):
+    detail = customar_ditail.objects.all()
+    context = {
+         'detail':detail
+    }
+
+    return render(request , 'admin_panel/htmx/customar_detail.html',context)
