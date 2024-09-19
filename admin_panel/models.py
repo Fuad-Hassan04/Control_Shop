@@ -49,7 +49,8 @@ class customar_ditail(models.Model):
 class mounth_name(models.Model):
     name = models.CharField(max_length=20)
 
-    
+    def __str__(self):
+        return f"{self.name}"
 class total_cost(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name_mounth = models.ForeignKey(mounth_name, on_delete=models.CASCADE)
