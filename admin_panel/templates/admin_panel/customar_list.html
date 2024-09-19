@@ -538,47 +538,59 @@
 
 
 
-
                         <div class="table-responsive">
                             <table class="table table-hover table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="checkbox-area" scope="col">
-                                            <div class="form-check form-check-primary">
-                                                <input class="form-check-input" id="hover_parent_all" type="checkbox">
-                                            </div>
-                                        </th>
-                                        <th scope="col">Name <p style="background-color: rgb(255, 255, 255);">Click the name for detail</p></th>
-                                        <th scope="col">Address</th>
-                                        <th class="text-center" scope="col">Fhone</th>
-                                        <th class="text-center" scope="col">Type</th>
+                                        <th>Name</th>
+                                        <th>Address</th>
+                                        <th>Phone</th>
+                                        <th>Type</th>
+                                        <th>Edit</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {% for customar in customars %}
-                                    <tr> 
-                                    
+                                {% for customer in customars %}
+                                    <tr>
+                                        <td>{{ customer.name }}</td>
+                                        <td>{{ customer.address }}</td>
+                                        <td>{{ customer.phone }}</td>
+                                        <td>{{ customer.customer_type }}</td>
                                         <td>
-                                            <div class="form-check form-check-primary">
-                                                <input class="form-check-input hover_child" type="checkbox">
-                                            </div>
+                                            <!-- Edit Button -->
+                                            <button class="btn btn-primary btn-sm" 
+                                                hx-get="{% url 'edit_customer' customer.id %}" 
+                                                hx-target="#editModalContent" 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#editModal">
+                                                Edit
+                                            </button>
                                         </td>
-                                        <td data-bs-toggle="modal" data-bs-target="#exampleModal"><a href="#" hx-get="{% url 'customar_detail' %}?costoma={{customar.id}}" hx-target="#detail">{{customar.name}} </td></a>
-                                        <td>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                                            <span class="table-inner-text">{{customar.address}}</span>
-                                        </td>
-                                        <td class="text-center">{{customar.fhone}}</td>
-                                        <td class="text-center">
-                                            <span class="badge badge-light-success">{{customar.customer_type}}</span>
-                                        </td>
-                                   
                                     </tr>
                                 {% endfor %}
-
                                 </tbody>
                             </table>
                         </div>
+                        
+                        <!-- Modal for Editing Customer -->
+                        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editModalLabel">Edit Customer</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" id="editModalContent">
+                                        <!-- Form content will be loaded here via HTMX -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- HTMX Script -->
+                        <script src="https://unpkg.com/htmx.org"></script>
+                        
+                        
 
 
                     </div>

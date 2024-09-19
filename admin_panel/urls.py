@@ -11,7 +11,7 @@ path('signout/', sign_out, name='sign_out'),
 path('user_profile/', user_profile, name='user_profile'),
 path('customar_list/', customar_list, name='customar_list'),
 path('total_cost/', total_costs, name='total_cost'),
-path('customar-detail/', customar_detail_by_modal, name='customar_detail'),
-
+path('edit-customer/<int:id>/', edit_customer, name='edit_customer'),
+path('update-customer/<int:id>/', update_customer, name='update_customer'),
 
 ]

@@ -3,10 +3,12 @@ from .models import *
 from django.contrib.auth import authenticate , logout , login
 from .forms import CustomarForm
 customar
-
+from django.http import HttpResponse
 # customar create views 
 
 def add_customar(request):
+
+
     customer_type_choices = customar.CUSTOMER_TYPE_CHOICES
 
     if request.method == 'POST':
@@ -25,6 +27,28 @@ def add_customar(request):
     }
 
     return render(request, 'admin_panel/add_customar.html', context)
+
+
+# HTMX GET request to load customer data in modal
+def edit_customer(request, id):
+    customer = get_object_or_404(customar, id=id)
+    form = CustomarForm(instance=customer)
+    
+    return render(request, 'admin_panel/update_customar.html', {'form': form, 'customer': customer})
+
+     # POST request to update customer data
+def update_customer(request, id):
+    customer = get_object_or_404(customar, id=id)
+    
+    if request.method == 'POST':
+        form = CustomarForm(request.POST, instance=customer)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('Customer updated successfully')
+    
+
+     
+    return render(request, 'admin_panel/update_customar.html', {'form': form, 'customer': customer})
 
 
 # add now or 
