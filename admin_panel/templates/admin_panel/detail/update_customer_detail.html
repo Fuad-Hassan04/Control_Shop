@@ -45,36 +45,43 @@
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     
-                                    <h2>Add Detail</h2>
-                                    <p>Enter all information to add detail</p>
+                                    <h2>Update customar detail</h2>
+                                    <p>Enter all information to update customar detail </p>
                                     
                                 </div>
-
+                            
                                 <form method="POST">  
                                     {% csrf_token %}
 
                                 
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Name</label>
-                                            <input type="text" name="name" class="form-control add-billing-address-input" required>
+                                            <label class="form-label">Buy Product</label>
+                                           
+                                            <input type="text" name="buy_product" class="form-control add-billing-address-input" value="{{customar1.buy_product}}">
+                                            
                                         </div>
                                     </div>
                                 
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Address</label>
-                                            <input type="text" name="address" class="form-control" required>
+                                            <label class="form-label">Taken money </label>
+                                            <input type="text" name="taken_money" class="form-control"value="{{customar1.given_money}}">
                                         </div>
                                     </div>
                                 
                                     <div class="col-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Phone Number</label>
-                                            <input type="text" name="fhone" class="form-control" required>
+                                            <label class="form-label">Owed Money</label>
+                                            <input type="text" name="get_money" class="form-control"value="{{customar1.get_money}}">
                                         </div>
                                     </div>
-                                
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Total Ammount</label>
+                                            <input type="text" name="total_amount" class="form-control"value="{{customar1.total_ammount}}">
+                                        </div>
+                                    </div>
                                     <div class="col-12">
                                         <div class="mb-3">
 
@@ -83,12 +90,14 @@
                                 
                                     <div class="col-12">
                                         <div class="mb-4">
-                                            <button type="submit" class="btn btn-secondary w-100">Add Customar</button>
+                                            <button type="submit" class="btn btn-secondary w-100">Update Customar Detail</button>
                                         </div>
-                                       <a href="{% url 'index' %}"><div class="col-12">
+                                       <a href="{% url 'customar_detail' id=customar1.id %}">
                                         <button type="button" id="cancel-btn" class="btn btn-light w-100">Cancel</button>
-                                    </div></a>
-                                        
+                                    </a>
+                                    
+                                    </div>
+                               
                                     </div>
                                 </form>
                                 

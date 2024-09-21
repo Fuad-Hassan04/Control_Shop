@@ -45,14 +45,24 @@
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     
-                                    <h2>Add Detail</h2>
-                                    <p>Enter all information to add detail</p>
+                                    <h2>Add New Customar</h2>
+                                    <p>Enter all information to register new customar</p>
                                     
                                 </div>
 
                                 <form method="POST">  
                                     {% csrf_token %}
-
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Customar Type</label>
+                                            <select class="form-select" name="customer_type" id="type" required>
+                                                <option value="" disabled selected>Select Customar Type</option>
+                                                {% for value, label in types %}
+                                                    <option value="{{ value }}">{{ label }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
                                 
                                     <div class="col-md-12">
                                         <div class="mb-3">

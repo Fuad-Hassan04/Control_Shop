@@ -1,13 +1,11 @@
 from django.shortcuts import render , redirect , get_object_or_404 
 from .models import *
 from django.contrib.auth import authenticate , logout , login
-from .forms import CustomarForm
-customar
+from .forms import *
 from django.http import JsonResponse , Http404
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
-# customar create views 
-
+# customar create views
 def add_customar(request):
 
 
@@ -78,7 +76,7 @@ def delete_customar(request):
 def add_or(request):
      return render(request , 'admin_panel/add_or.html' )
 
-@login_required(login_url="sign_in/")
+
 def index(request):
     total_customers = customar.objects.count()
     total_money = customar_ditail.objects.aggregate(total=models.Sum('total_amount'))['total'] or 0      
@@ -186,10 +184,70 @@ def total_costs(request):
 
 
 
-def customar_detail_by_modal(request):
-    detail = customar_ditail.objects.all()
+def customar_details(request , id ):
+
+    customer = get_object_or_404(customar, id=id)
+    detail = customar_ditail.objects.filter(customer=customer)
     context = {
          'detail':detail
     }
+   
+    
 
-    return render(request , 'admin_panel/htmx/customar_detail.html',context)
+    return render(request , 'admin_panel/customar_detail.html',context)
+
+
+def owed_details(request):
+    return render(request , 'admin_panel/owed_dital.html')
+def profit_detail(request):
+    return render(request , 'admin_panel/prfit_ditail.html')
+
+def create_owed_detail(request):
+    return render(request , 'admin_panel/detail/create_owed_detail.html')
+
+def create_customar_detail(request, id):
+    customer = get_object_or_404(customar, id=id)
+    
+    if request.method == 'POST':
+        form = AddDetailForm(request.POST)
+        if form.is_valid():
+            customar_detail = form.save(commit=False)
+            customar_detail.customer = customer  # এখানে customer সঠিকভাবে সেট হচ্ছে
+            customar_detail.save()
+            return redirect("index")
+        else:
+            print(form.errors)  # ডিবাগ করার জন্য ফর্ম ত্রুটিগুলো দেখানো হচ্ছে
+    else:
+        form = AddDetailForm()
+
+    return render(request, 'admin_panel/detail/create_customar_detail.html', {'form': form})
+
+
+def update_customer_detail(request, id):
+    customar1 = get_object_or_404(customar_ditail, id=id) # template e jate change korte na hoi tai customar1 dewa 
+
+    try :
+       details = customar_ditail.objects.get(id=id)
+    except Exception as e :
+      raise Http404(f"customar not found by your given id:{id}")
+    
+    if request.method == 'POST':
+          buy_product = request.POST.get('buy_product')
+          given_money = request.POST.get('taken_money')
+          owed_money = request.POST.get('get_money')
+          total_amount = request.POST.get('total_amount')
+
+
+          details.buy_product = buy_product
+          details.given_money = given_money 
+          details.get_money = owed_money
+          details.total_amount = total_amount
+
+          details.save()
+          return redirect('customar_detail', id=customar1.id)
+    context = {
+         'customar1':customar1
+    }
+    return render(request , 'admin_panel/detail/update_customer_detail.html' , context)
+
+

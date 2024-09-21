@@ -45,39 +45,39 @@
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     
-                                    <h2>Add Detail</h2>
-                                    <p>Enter all information to add detail</p>
+                                    <h2>Add New Customar</h2>
+                                    <p>Enter all information to register new customar</p>
                                     
                                 </div>
 
-                                <form method="POST">  
+                                <form method="POST">
                                     {% csrf_token %}
-
                                 
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Name</label>
-                                            <input type="text" name="name" class="form-control add-billing-address-input" required>
+                                            <label class="form-label">Buy product</label>
+                                            <input type="text" name="buy_product" class="form-control add-billing-address-input" required>
                                         </div>
                                     </div>
                                 
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Address</label>
-                                            <input type="text" name="address" class="form-control" required>
+                                            <label class="form-label">Given Money</label>
+                                            <input type="text" name="given_money" class="form-control" required>
                                         </div>
                                     </div>
                                 
                                     <div class="col-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Phone Number</label>
-                                            <input type="text" name="fhone" class="form-control" required>
+                                            <label class="form-label">Taken Money</label>
+                                            <input type="text" name="get_money" class="form-control">
                                         </div>
                                     </div>
                                 
                                     <div class="col-12">
                                         <div class="mb-3">
-
+                                            <label class="form-label">Total Amount</label>
+                                            <input type="text" name="total_amount" class="form-control" required>
                                         </div>
                                     </div>
                                 
@@ -85,12 +85,13 @@
                                         <div class="mb-4">
                                             <button type="submit" class="btn btn-secondary w-100">Add Customar</button>
                                         </div>
-                                       <a href="{% url 'index' %}"><div class="col-12">
-                                        <button type="button" id="cancel-btn" class="btn btn-light w-100">Cancel</button>
-                                    </div></a>
-                                        
+                                    </div>
+                                
+                                    <div class="col-12">
+                                        <a href="{% url 'index' %}" class="btn btn-light w-100" role="button">Cancel</a>
                                     </div>
                                 </form>
+                                
                                 
 
                             

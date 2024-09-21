@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>CORK Admin - Multipurpose Bootstrap Dashboard Template </title>
+    <title>BakiPai</title>
     <link rel="icon" type="image/x-icon" href="{% static 'admin_theme/src/assets/img/favicon.ico' %}"/>
     <link href="{% static 'admin_theme/layouts/vertical-dark-menu/css/light/loader.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'admin_theme/layouts/vertical-dark-menu/css/dark/loader.css' %}" rel="stylesheet" type="text/css" />
@@ -44,7 +44,7 @@
                     </a>
                 </li>
                 <li class="nav-item theme-text">
-                    <a href="index.html" class="nav-link"> CORK </a>
+                    <a href="index.html" class="nav-link"> BakiPai </a>
                 </li>
             </ul>
 
@@ -287,17 +287,17 @@
                             </div>
                         </a>
                         <ul class="collapse submenu list-unstyled show" id="dashboard" data-bs-parent="#accordionExample">
-                            <li class="active">
+                            <li>
                                 <a href="{% url 'customar_list' %}"> Customars </a>
                             </li>
                             <li>
-                                <a href="./index2.html">Total Cost </a>
+                                <a href="{% url 'total_cost'%}">Total Cost </a>
                             </li>
                             <li>
-                                <a href="./index2.html"> Profit Ditails </a>
+                                <a href="{% url 'profit_detail' %}"> Profit Ditails </a>
                             </li>
                             <li>
-                                <a href="./index2.html"> Owed Ditails</a>
+                                <a href="{%url 'index' %}"> Home</a>
                             </li>
                         </ul>
                     </li>
@@ -394,8 +394,8 @@
                         
                                         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                             <ol class="breadcrumb">
-                                                <li class="breadcrumb-item"><a href="#">My Shop</a></li>
-                                                <li class="breadcrumb-item active" aria-current="page">Home</li>
+                                                <li class="breadcrumb-item"><a href="{% url 'index' %}">My Shop</a></li>
+                                                <li class="breadcrumb-item active" aria-current="page">Owed Detail</li>
                                             </ol>
                                         </nav>
                         

@@ -66,8 +66,11 @@ class total_cost(models.Model):
 class owed_detail(models.Model):
     owed_customer = models.ForeignKey(customar, on_delete=models.CASCADE , blank=True)
     owed_money_for_product = models.CharField(max_length=200000)
+    given_money = models.IntegerField()
     owed_money = models.IntegerField()
- #   created_at = models.DateTimeField(auto_now_add=True)
+    given_product_date = models.DateTimeField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.owed_customer} - {self.owed_money}"
