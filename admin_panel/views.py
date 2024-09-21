@@ -1,9 +1,11 @@
-from django.shortcuts import render , redirect , get_object_or_404
+from django.shortcuts import render , redirect , get_object_or_404 
 from .models import *
 from django.contrib.auth import authenticate , logout , login
 from .forms import CustomarForm
 customar
-from django.http import HttpResponse
+from django.http import JsonResponse , Http404
+from django.template.loader import render_to_string
+from django.contrib.auth.decorators import login_required
 # customar create views 
 
 def add_customar(request):
@@ -30,32 +32,53 @@ def add_customar(request):
 
 
 # HTMX GET request to load customer data in modal
-def edit_customer(request, id):
-    customer = get_object_or_404(customar, id=id)
-    form = CustomarForm(instance=customer)
-    
-    return render(request, 'admin_panel/update_customar.html', {'form': form, 'customer': customer})
+
 
      # POST request to update customer data
-def update_customer(request, id):
-    customer = get_object_or_404(customar, id=id)
+def update_customer(request , customer_id ):
+    customar1 = get_object_or_404(customar, id=customer_id)
+
+    try :
+       customars = customar.objects.get(id=customer_id)
+    except Exception as e :
+      raise Http404(f"customar not found by your given id:{id}")
     
     if request.method == 'POST':
-        form = CustomarForm(request.POST, instance=customer)
-        if form.is_valid():
-            form.save()
-            return HttpResponse('Customer updated successfully')
-    
+          name = request.POST.get('name')
+          address = request.POST.get('address')
+          fhone = request.POST.get('fhone')
+
+
+          customars.name = name
+          customars.address = address 
+          customars.fhone = fhone
+
+          customars.save()
+          return redirect('customar_list')
+    context = {
+         'customar1':customar1
+    }
+    return render(request, 'admin_panel/update_customar.html',context)
+
 
      
-    return render(request, 'admin_panel/update_customar.html', {'form': form, 'customer': customer})
+   
 
+
+def delete_customar(request):
+    if request.method == 'POST':
+        delete_id = request.POST.get('delete_id')
+        if delete_id:
+            customar_to_delete = customar.objects.get(id=delete_id)
+            customar_to_delete.delete()
+            return JsonResponse({"success": True})
+    return render(request, 'admin_panel/customar_list.html')
 
 # add now or 
 def add_or(request):
      return render(request , 'admin_panel/add_or.html' )
 
-
+@login_required(login_url="sign_in/")
 def index(request):
     total_customers = customar.objects.count()
     total_money = customar_ditail.objects.aggregate(total=models.Sum('total_amount'))['total'] or 0      
@@ -161,9 +184,7 @@ def total_costs(request):
      }
      return render(request , 'admin_panel/total_cost.html' , context)
 
-def test(request):
 
-    return render(request , 'admin_panel/test.html')
 
 def customar_detail_by_modal(request):
     detail = customar_ditail.objects.all()
