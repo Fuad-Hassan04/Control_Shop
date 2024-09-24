@@ -68,9 +68,19 @@ class owed_detail(models.Model):
     owed_money_for_product = models.CharField(max_length=200000)
     given_money = models.IntegerField()
     owed_money = models.IntegerField()
-    given_product_date = models.DateTimeField()
+    given_product_date = models.DateTimeField(auto_now_add=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.owed_customer} - {self.owed_money}"
+    
+
+class profit_detail(models.Model):
+    product_name = models.TextField(max_length=20000)
+    profit = models.IntegerField()
+    extra =  models.TextField(max_length=20000 , blank=True , null=True)
+    extra_profit = models.IntegerField( blank=True , null=True)
+    date = models.DateField(auto_now_add=True)
+
+

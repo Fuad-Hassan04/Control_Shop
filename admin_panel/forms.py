@@ -10,3 +10,4 @@ class AddDetailForm(forms.ModelForm):
     class Meta:
         model = customar_ditail
         fields = [ 'buy_product', 'given_money', 'get_money','total_amount']
+

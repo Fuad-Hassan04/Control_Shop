@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>CORK Admin - Multipurpose Bootstrap Dashboard Template </title>
+    <title>BakiPai</title>
     <link rel="icon" type="image/x-icon" href="{% static 'admin_theme/src/assets/img/favicon.ico' %}"/>
     <link href="{% static 'admin_theme/layouts/vertical-dark-menu/css/light/loader.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'admin_theme/layouts/vertical-dark-menu/css/dark/loader.css' %}" rel="stylesheet" type="text/css" />
@@ -44,7 +44,7 @@
                     </a>
                 </li>
                 <li class="nav-item theme-text">
-                    <a href="index.html" class="nav-link"> CORK </a>
+                    <a href="index.html" class="nav-link">BakiPai</a>
                 </li>
             </ul>
 
@@ -219,7 +219,7 @@
                             </div>
                         </div>
                         <div class="dropdown-item">
-                            <a href="user-profile.html">
+                            <a href="{% url 'user_profile' %}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> <span>Profile</span>
                             </a>
                         </div>
@@ -265,7 +265,7 @@
                             </a>
                         </div>
                         <div class="nav-item theme-text">
-                            <a href="./index.html" class="nav-link"> CORK </a>
+                            <a href="./index.html" class="nav-link">BakiPai</a>
                         </div>
                     </div>
                     <div class="nav-item sidebar-toggle">
@@ -291,10 +291,10 @@
                                 <a href="{% url 'customar_list' %}"> Customars </a>
                             </li>
                             <li>
-                                <a href="./index2.html"> Profit Ditails </a>
+                                <a href="{% url 'profit_detail' %}"> Profit Ditails </a>
                             </li>
                             <li>
-                                <a href="./index2.html"> Owed Ditails</a>
+                                <a href="{% url 'owed_detail' %}"> Owed Ditails</a>
                             </li>
                             <li>
                                 <a href="{% url 'index' %}"> Home </a>
@@ -500,11 +500,17 @@
                                 <div class="button-container d-flex justify-content-between align-items-center">
                                     <!-- Full Width Button -->
                                     <button type="button" class="btn btn-secondary full-width-btn" data-bs-container="body" data-bs-placement="left" data-bs-content="Tooltip on left">
-                                        Total cost 
+                                        Your monthly cost
                                     </button>
                         
                                     <!-- Dropdown for Select Customer Type -->
-                            
+                                    <div class="dropdown dropdown-container">
+                                   <a href="{% url 'index' %}">     <button class="btn btn-secondary dropdown-toggle dropdown-btn btn-sm" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Add your last month
+                                </button></a>
+                                      
+                                        
+                                    </div>
                                 </div>
                             </div>
                             
@@ -524,58 +530,35 @@
                         
 
                         
-
-
                         <div class="table-responsive">
                             <table class="table table-hover table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="checkbox-area" scope="col">
-                                            <div class="form-check form-check-primary">
-                                                <input class="form-check-input" id="hover_parent_all" type="checkbox">
-                                            </div>
-                                        </th>
-                                        <th scope="col"> Store rent</th>
-                                        <th scope="col">Electricity Bill + Extra</th>
-                                        <th scope="col">Employ Salary</th>
-                                        <th scope="col">New Product List</th>
-                                        <th scope="col">New Product Price</th>
-                                        <th scope="col">Mounth Total Cost </th>
+                                        <th>Mounth Name</th>
+                                        <th>Store Rent</th>
+                                        <th>Electricity Bill + Extra</th>
+                                        <th>Employ Salary</th>
+                                        <th>New Product List</th>
+                                        <th>New Product Price</th>
+                                        <th>Total Cost</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for costs in cost %}
+                                    {% for item in cost_with_hishab %}
                                     <tr>
-                                        <td>
-                                            <div class="form-check form-check-primary">
-                                                <input class="form-check-input hover_child" type="checkbox">
-                                            </div>
-                                        </td>
-                                        <td>{{ costs.store_rent }}</td>
-                                        <td>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
-                                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                                <line x1="16" y1="2" x2="16" y2="6"></line>
-                                                <line x1="8" y1="2" x2="8" y2="6"></line>
-                                                <line x1="3" y1="10" x2="21" y2="10"></line>
-                                            </svg>
-                                            <span class="table-inner-text">{{ costs.bill }}</span>
-                                        </td>
-                                        <td class="text-center">{{ costs.employs_sallary }}</td>
-                                        <td class="text-center">
-                                            <span class="badge badge-light-success">{{ costs.buy_product_list }}</span>
-                                        </td>
-                                        <td class="text-center">
-                                            <span class="badge badge-light-success">{{ costs.by_product_rate }}</span>
-                                        </td>
-                                        <td class="text-center">
-                                            <span class="badge badge-light-success">{{ cost_with_hishab }}</span>
-                                        </td>
+                                        <td>{{ item.cost.name_mounth.name }}</td>
+                                        <td>{{ item.cost.store_rent }}</td>
+                                        <td>{{ item.cost.bill }}</td>
+                                        <td>{{ item.cost.employs_sallary }}</td>
+                                        <td>{{ item.cost.buy_product_list }}</td>
+                                        <td>{{ item.cost.by_product_rate }}</td>
+                                        <td>{{ item.total_cost_for_month }}</td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
                             </table>
                         </div>
+                        
                         
 
                     </div>

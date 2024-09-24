@@ -265,7 +265,7 @@
                             </a>
                         </div>
                         <div class="nav-item theme-text">
-                            <a href="./index.html" class="nav-link"> CORK </a>
+                            <a href="./index.html" class="nav-link">BakiPai</a>
                         </div>
                     </div>
                     <div class="nav-item sidebar-toggle">
@@ -446,63 +446,71 @@
     
 
                     </div>
-                    
-                    <div class="auth-container d-flex">
-                        <div class="container mx-auto align-self-center">
-                            <div class="row">
-                                <!-- Increased column size for a larger form -->
-                                <div class="col-xxl-6 col-xl-8 col-lg-10 col-md-10 col-12 d-flex flex-column align-self-center mx-auto">
-                                    <div class="card mt-3 mb-3">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-12 mb-3">
-                                                    <h2>Add New Customar</h2>
-                                                    <p>Enter all information to register new customar</p>
-                                                </div>
-                    
-                                                <form method="POST">
-                                                    {% csrf_token %}
-                                                    
-                                                    <div class="col-md-12">
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Buy product</label>
-                                                            <input type="text" name="buy_product" class="form-control add-billing-address-input" required>
-                                                        </div>
-                                                    </div>
-                                                
-                                                    <div class="col-md-12">
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Given Money</label>
-                                                            <input type="text" name="given_money" class="form-control" required>
-                                                        </div>
-                                                    </div>
-                                                
-                                                    <div class="col-12">
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Taken Money</label>
-                                                            <input type="text" name="get_money" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                
-                                                    <div class="col-12">
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Total Amount</label>
-                                                            <input type="text" name="total_amount" class="form-control" required>
-                                                        </div>
-                                                    </div>
-                                                
-                                                    <div class="col-12">
-                                                        <div class="mb-4">
-                                                            <button type="submit" class="btn btn-secondary w-100">Add Customar</button>
-                                                        </div>
-                                                    </div>
-                                                
-                                                    <div class="col-12">
-                                                        <a href="{% url 'index' %}" class="btn btn-light w-100" role="button">Cancel</a>
-                                                    </div>
-                                                </form>
-                    
+                    <div class="container mx-auto align-self-center">
+                        <div class="row">
+                            <div class="col-xxl-6 col-xl-8 col-lg-8 col-md-10 col-12 d-flex flex-column align-self-center mx-auto">
+                                <div class="card mt-3 mb-3">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <h2>Add new month cost</h2>
+                                                <p>Enter all information to add new month</p>
                                             </div>
+                    
+                                            <form method="POST">  
+                                                {% csrf_token %}
+
+                                                <div class="col-md-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Month name</label>
+                                                        <input type="text" name="month" class="form-control add-billing-address-input" required>
+                                                    </div>
+                                                </div>
+                                            
+                                               
+
+                                            
+                                                <div class="col-md-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Store rent</label>
+                                                        <input type="text" name="store_rent" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                            
+                                                <div class="col-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Electricity bill + Extra more</label>
+                                                        <input type="text" name="bill" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Emplus sallary</label>
+                                                        <input type="text" name="employ_sallary" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label"> Buy product list</label>
+                                                        <input type="text" name="buy_product_list" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Buy product rate</label>
+                                                        <input type="text" name="buy_product_rate" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                            
+                                                <div class="col-12">
+                                                    <div class="mb-4">
+                                                        <button type="submit" class="btn btn-secondary w-100">Add month</button>
+                                                    </div>
+                                                   <a href="{% url 'index' %}"><div class="col-12">
+                                                    <button type="button" id="cancel-btn" class="btn btn-light w-100">Cancel</button>
+                                                </div></a>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -511,7 +519,8 @@
                     </div>
                     
                 </div>
-
+     
+            
 
                
 

@@ -17,7 +17,7 @@ def add_customar(request):
             customar1 = form.save(commit=False)
             customar1.user = request.user
             customar1.save()
-            return redirect("add_or")
+            return redirect("index")
     else:
         form = CustomarForm()
 
@@ -157,30 +157,26 @@ def customar_list(request):
     return render(request , 'admin_panel/customar_list.html', context)
 
 def total_costs(request):
-     cost = total_cost.objects.all()
-     #if cost.exists():
-        
-       # first_cost = cost.first()
-      #  store_rent = first_cost.store_rent
-       # bill = first_cost.bill
-       # employ_sallary = first_cost.employs_sallary
-      #  product_rate = first_cost.by_product_rate
-     cost_with_hishab = []
-     for c in cost:
-        total_hishab = c.store_rent + c.bill + c.employs_sallary + c.by_product_rate
+
+    costs = total_cost.objects.all()  # সমস্ত খরচের তালিকা নিয়ে আসা
+
+    cost_with_hishab = []
+    for cost in costs:
+        total_cost_for_month = (
+            cost.store_rent + cost.bill + cost.employs_sallary + cost.by_product_rate
+        )
         cost_with_hishab.append({
-            'cost': c,
-            'total_hishab': total_hishab
+            'cost': cost,
+            'total_cost_for_month': total_cost_for_month
         })
 
-    # else:
-        
-        #total_hishab = 0
-     context={
-          'cost':cost,
-          'cost_with_hishab':cost_with_hishab
-     }
-     return render(request , 'admin_panel/total_cost.html' , context)
+    context = {
+        'cost_with_hishab': cost_with_hishab
+    }
+
+    
+
+    return render(request , 'admin_panel/total_cost.html' , context)
 
 
 
@@ -198,12 +194,48 @@ def customar_details(request , id ):
 
 
 def owed_details(request):
-    return render(request , 'admin_panel/owed_dital.html')
-def profit_detail(request):
-    return render(request , 'admin_panel/prfit_ditail.html')
+    owed = owed_detail.objects.all()
+    context = {
+        'owed':owed
+    }
+    return render(request , 'admin_panel/owed_dital.html'  , context)
+def profit_details(request):
+    detail = profit_detail.objects.all()
+    context = {
+        'detail':detail
+    }
+    return render(request , 'admin_panel/prfit_ditail.html' , context)
 
 def create_owed_detail(request):
-    return render(request , 'admin_panel/detail/create_owed_detail.html')
+    customar_name = customar.objects.all()
+
+    
+    if request.method == 'POST':
+          customer_id = request.POST.get('customar_name')
+          customer_instance = customar.objects.get(pk=customer_id) 
+          
+          owed_money_for_product = request.POST.get('owed_money_for_product')
+          given_money = request.POST.get('given_money')
+          owed_money = request.POST.get('owed_money')
+          
+          if customer_instance and owed_money_for_product and given_money and owed_money:
+              owed_detail.objects.create(
+                owed_customer = customer_instance ,
+                owed_money_for_product = owed_money_for_product,
+                given_money = given_money , 
+                owed_money = owed_money
+
+                  
+              )
+              
+
+          else : 
+           massage = "please full all form "
+          return redirect('owed_detail')
+    context = {
+        'customar_name':customar_name
+    }
+    return render(request , 'admin_panel/detail/create_owed.html' , context)
 
 def create_customar_detail(request, id):
     customer = get_object_or_404(customar, id=id)
@@ -251,3 +283,31 @@ def update_customer_detail(request, id):
     return render(request , 'admin_panel/detail/update_customer_detail.html' , context)
 
 
+def add_cost(request):
+    if request.method == 'POST':
+       month1 = request.POST.get('month')
+       store_rent = request.POST.get('store_rent')
+       bill = request.POST.get('bill')
+       employ_sallary = request.POST.get('employ_sallary')
+       buy_product_list = request.POST.get('buy_product_list')
+       buy_product_rate = request.POST.get('buy_product_rate')
+
+       month1 = total_cost.name_mounth 
+       if  month1 and store_rent and bill and employ_sallary and buy_product_list and buy_product_rate  :
+            total_cost.objects.create(
+
+                name_mounth = month1,
+                store_rent = store_rent ,
+                bill = bill ,
+                employ_sallary = employ_sallary , 
+                buy_product_list = buy_product_list,
+                buy_product_rate = buy_product_rate
+
+            )
+            return  redirect("customar_list")
+       
+       else : 
+           massage = "please full all form "
+
+        
+    return render(request , 'admin_panel/detail/add_cost.html')

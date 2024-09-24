@@ -44,7 +44,7 @@
                     </a>
                 </li>
                 <li class="nav-item theme-text">
-                    <a href="index.html" class="nav-link"> CORK </a>
+                    <a href="index.html" class="nav-link">  </a>
                 </li>
             </ul>
 
@@ -219,7 +219,7 @@
                             </div>
                         </div>
                         <div class="dropdown-item">
-                            <a href="user-profile.html">
+                            <a href="{% url 'user_profile' %}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> <span>Profile</span>
                             </a>
                         </div>
@@ -265,7 +265,7 @@
                             </a>
                         </div>
                         <div class="nav-item theme-text">
-                            <a href="./index.html" class="nav-link"> CORK </a>
+                            <a href="./index.html" class="nav-link">BakiPai</a>
                         </div>
                     </div>
                     <div class="nav-item sidebar-toggle">
@@ -294,10 +294,10 @@
                                 <a href="{% url 'total_cost' %}">Total Cost </a>
                             </li>
                             <li>
-                                <a href="./index2.html"> Profit Ditails </a>
+                                <a href="{% url 'profit_detail' %}"> Profit Ditails </a>
                             </li>
                             <li>
-                                <a href="./index2.html"> Owed Ditails</a>
+                                <a href="{% url 'owed_detail' %}"> Owed Ditails</a>
                             </li>
                         </ul>
                     </li>

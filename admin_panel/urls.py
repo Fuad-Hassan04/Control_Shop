@@ -16,10 +16,11 @@ path('update-customer/<int:customer_id>/', update_customer, name='update_custome
 path('customar_detail/<int:id>/', customar_details, name='customar_detail'),
 path('delete_customar/', delete_customar, name='delete_customar'),
 path('owed_detail/', owed_details, name='owed_detail'),
-path('profit_detail/', profit_detail, name='profit_detail'),
+path('profit_detail/', profit_details, name='profit_detail'),
 path('add_owed_detail/', create_owed_detail, name='create_owed_detail'),
 path('add_cystomar_detail/<int:id>/', create_customar_detail, name='create_customar_detail'),
 path('update_customer_detail/<int:id>/', update_customer_detail, name='update_customer_detail'),
+path('add_cost/', add_cost, name='add_cost'),
 
 
 ]
