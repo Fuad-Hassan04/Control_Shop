@@ -284,6 +284,7 @@ def update_customer_detail(request, id):
 
 
 def add_cost(request):
+
     if request.method == 'POST':
        month1 = request.POST.get('month')
        store_rent = request.POST.get('store_rent')
@@ -311,3 +312,93 @@ def add_cost(request):
 
         
     return render(request , 'admin_panel/detail/add_cost.html')
+
+
+def create_profit_detail(request): 
+
+      
+
+    if request.method == 'POST':
+
+        product_name = request.POST.get('product_name')
+        profit = request.POST.get('profit')
+        extra = request.POST.get('extra')  or None 
+        extra_profit = request.POST.get('extra_profit')  or None 
+          
+        if product_name and profit  :
+              profit_detail.objects.create(
+                product_name = product_name ,
+                profit = profit,
+                extra = extra , 
+                extra_profit = extra_profit
+
+                  
+              )
+              
+
+        else : 
+           return redirect('create_profit_detail')
+        return redirect('profit_detail')
+
+    return render(request , 'admin_panel/detail/add_profit_detail.html' )
+
+
+def update_owed_detail(request , id ):
+    customar1 = get_object_or_404(owed_detail, id=id) # template e jate change korte na hoi tai customar1 dewa 
+
+    try :
+       update_owed = owed_detail.objects.get(id=id)
+    except Exception as e :
+      raise Http404(f"customar not found by your given id:{id}")
+    
+    if request.method == 'POST':
+          product_name = request.POST.get('product_name')
+          given_money = request.POST.get('given_money')
+          owed_money = request.POST.get('owed_money')
+     
+
+
+          update_owed.owed_money_for_product = product_name
+          update_owed.given_money = given_money 
+          update_owed.owed_money = owed_money
+          
+
+          update_owed.save()
+          return redirect('owed_detail', id=customar1.id)
+    context = {
+         'customar1':customar1
+    }
+
+    return render(request , 'admin_panel/detail/update_owed.html' , context)
+
+
+
+def update_profit_detail(request , id ):
+    customar1 = get_object_or_404(profit_detail, id=id) # template e jate change korte na hoi tai customar1 dewa 
+
+    try :
+       update_profit = profit_detail.objects.get(id=id)
+    except Exception as e :
+      raise Http404(f"customar not found by your given id:{id}")
+    
+    if request.method == 'POST':
+          product_name = request.POST.get('product_name')
+          profit = request.POST.get('profit')
+          extra = request.POST.get('extra') or None
+          extra_profit = request.POST.get('extra_profit') or None
+     
+
+
+          update_profit.product_name = product_name
+          update_profit.profit = profit 
+          update_profit.extra = extra
+          update_profit.extra_profit = extra_profit
+          
+
+          update_profit.save()
+          return redirect('profit_detail')
+    context = {
+         'customar1':customar1
+    }
+
+    return render(request , 'admin_panel/detail/update_profit.html' , context)

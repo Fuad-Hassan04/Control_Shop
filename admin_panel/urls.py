@@ -21,6 +21,9 @@ path('add_owed_detail/', create_owed_detail, name='create_owed_detail'),
 path('add_cystomar_detail/<int:id>/', create_customar_detail, name='create_customar_detail'),
 path('update_customer_detail/<int:id>/', update_customer_detail, name='update_customer_detail'),
 path('add_cost/', add_cost, name='add_cost'),
+path('add_profit_detail/', create_profit_detail, name='create_profit_detail'),
+path('update_owed_detail/<int:id>/', update_owed_detail, name='update_owed_detail'),
+path('update_profit_detail/<int:id>/', update_profit_detail, name='update_profit_detail'),
 
 
 ]

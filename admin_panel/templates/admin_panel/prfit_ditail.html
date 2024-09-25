@@ -486,13 +486,13 @@
                         <div class="button-container d-flex justify-content-between align-items-center">
                             <!-- Full Width Button -->
                             <button type="button" class="btn btn-secondary full-width-btn" data-bs-container="body" data-bs-placement="left" data-bs-content="Tooltip on left">
-                                Your owed detail
+                                Your profit detail
                             </button>
                 
                             <!-- Dropdown for Select Customer Type -->
                             <div class="dropdown dropdown-container">
-                           <a href="{% url 'create_owed_detail' %}">     <button class="btn btn-secondary dropdown-toggle dropdown-btn btn-sm" type="button">
-                            Add new owed detail
+                           <a href="{% url 'create_profit_detail' %}">     <button class="btn btn-secondary dropdown-toggle dropdown-btn btn-sm" type="button">
+                            Add new profit  detail
                         </button></a>
                               
                                 
@@ -525,6 +525,7 @@
                                 <th>Extra product</th>
                                 <th>Extra profit</th>
                                 <th>Date</th>
+                                <th class="text-center" scope="col">Edit or Delete</th>
 
                             </tr>
                         </thead>
@@ -536,7 +537,14 @@
                                 <td>{{ item.extra}}</td>
                                 <td>{{ item.extra_profit}}</td>
                                 <td>{{ item.date}}</td>
-
+                                <td>                                <a href="{% url 'update_profit_detail' item.id %}"><button class="btn btn-primary mb-2 me-2" style="padding: 2px 5px; font-size: 12px;">Edit</button></a>
+                                
+                                -- 
+                               
+                                <button class="btn btn-danger mb-2 me-2" style="padding: 2px 5px; font-size: 12px;"  data-id="{{ item.id }}">
+                                    Delete
+                                </button></td>
+                     
                             </tr>
                             {% endfor %}
                         </tbody>
