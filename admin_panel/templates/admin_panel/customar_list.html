@@ -549,11 +549,15 @@
                                                     <a href="{% url 'update_customer' customar.id %}">
                                                         <button class="btn btn-primary mb-2 me-2" style="padding: 2px 5px; font-size: 12px;">Edit</button>
                                                     </a>  
-                                                    -- 
-                                                   
-                                                    <button class="btn btn-danger mb-2 me-2" style="padding: 2px 5px; font-size: 12px;" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ customar.id }}">
-                                                        Delete
-                                                    </button>
+                                     
+                                                    <form method="POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="delete" id="delete" value="{{customar.id}}">
+                                                        <button class="btn btn-danger mb-2 me-2" style="padding: 2px 5px; font-size: 12px;"  data-id="{{ customar.id }}">
+                                                            Delete
+                                                        </button>
+                                                       </form>
+
                                                     
                                                 </span>
                                             </td>
@@ -644,57 +648,3 @@
 
 
 <!-- Delete Confirmation Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteModalLabel">Are you sure?</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Are you sure you want to delete this customar?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-         <form method="Post">
-            {% csrf_token %}
-            <input type="hidden" name="delete" value="{{customar.id}}" >
-            <button type="button" name="delete" class="btn btn-danger" id="confirmDeleteBtn">Yes, Delete</button>
-            </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <script>
-      var deleteId;
-  
-      $('#deleteModal').on('show.bs.modal', function (event) {
-          var button = $(event.relatedTarget);
-          deleteId = button.data('id');  // Get customar ID from data-id attribute
-      });
-  
-      $('#confirmDeleteBtn').click(function() {
-          $.ajax({
-              url: "{% url 'delete_customar' %}",  // URL of your delete view
-              type: "POST",
-              data: {
-                  'delete_id': deleteId,  // Send the customar ID
-                  'csrfmiddlewaretoken': '{{ csrf_token }}',  // CSRF token for security
-              },
-              success: function(response) {
-                  if (response.success) {
-                      $('#deleteModal').modal('hide');  // Hide the modal after success
-                      location.reload();  // Reload the page to reflect the changes
-                  } else {
-                      alert(response.error);  // Display any error message
-                  }
-              },
-              error: function(xhr, status, error) {
-                  console.error("Error details:", xhr.responseText);  // Log error details
-                  alert('Something went wrong. Please try again.');  // Alert the user
-              }
-          });
-      });
-  </script>
-  

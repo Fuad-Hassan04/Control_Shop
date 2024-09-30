@@ -539,12 +539,14 @@
                                 <td>{{ item.date}}</td>
                                 <td>                                <a href="{% url 'update_profit_detail' item.id %}"><button class="btn btn-primary mb-2 me-2" style="padding: 2px 5px; font-size: 12px;">Edit</button></a>
                                 
-                                -- 
-                               
+                                
+                            <form method="POST">
+                             {% csrf_token %}
+                                <input type="hidden" name="delete" id="delete" value="{{item.id}}">
                                 <button class="btn btn-danger mb-2 me-2" style="padding: 2px 5px; font-size: 12px;"  data-id="{{ item.id }}">
                                     Delete
                                 </button></td>
-                     
+                            </form>
                             </tr>
                             {% endfor %}
                         </tbody>

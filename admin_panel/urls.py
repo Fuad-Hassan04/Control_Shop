@@ -14,7 +14,7 @@ path('total_cost/', total_costs, name='total_cost'),
 
 path('update-customer/<int:customer_id>/', update_customer, name='update_customer'),
 path('customar_detail/<int:id>/', customar_details, name='customar_detail'),
-path('delete_customar/', delete_customar, name='delete_customar'),
+
 path('owed_detail/', owed_details, name='owed_detail'),
 path('profit_detail/', profit_details, name='profit_detail'),
 path('add_owed_detail/', create_owed_detail, name='create_owed_detail'),
@@ -24,6 +24,7 @@ path('add_cost/', add_cost, name='add_cost'),
 path('add_profit_detail/', create_profit_detail, name='create_profit_detail'),
 path('update_owed_detail/<int:id>/', update_owed_detail, name='update_owed_detail'),
 path('update_profit_detail/<int:id>/', update_profit_detail, name='update_profit_detail'),
+path('f/', f, name='f'),
 
 
 ]

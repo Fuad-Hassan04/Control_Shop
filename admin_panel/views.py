@@ -59,18 +59,6 @@ def update_customer(request , customer_id ):
     return render(request, 'admin_panel/update_customar.html',context)
 
 
-     
-   
-
-
-def delete_customar(request):
-    if request.method == 'POST':
-        delete_id = request.POST.get('delete_id')
-        if delete_id:
-            customar_to_delete = customar.objects.get(id=delete_id)
-            customar_to_delete.delete()
-            return JsonResponse({"success": True})
-    return render(request, 'admin_panel/customar_list.html')
 
 # add now or 
 def add_or(request):
@@ -149,6 +137,13 @@ def customar_list(request):
     else:
           customars = customar.objects.all()
 
+
+    delete_customar = request.POST.get('delete')
+    if request.method == 'POST' and delete_customar:
+        delete_cus = customar.objects.get( id = delete_customar)
+        delete_cus.delete()
+        return redirect('customar_list')
+
     context = {
         'customars': customars,
         
@@ -184,6 +179,14 @@ def customar_details(request , id ):
 
     customer = get_object_or_404(customar, id=id)
     detail = customar_ditail.objects.filter(customer=customer)
+
+    delete_customar_detail = request.POST.get('delete')
+    if request.method == 'POST' and delete_customar_detail:
+        delete_cus_detail = customar_ditail.objects.get( id = delete_customar_detail)
+        delete_cus_detail.delete()
+        return redirect('customar_detail/<int:id>')
+
+
     context = {
          'detail':detail
     }
@@ -195,11 +198,25 @@ def customar_details(request , id ):
 
 def owed_details(request):
     owed = owed_detail.objects.all()
+
+
+    delete_owed_detail = request.POST.get('delete')
+    if request.method == 'POST' and delete_owed_detail:
+        delete_ow_detail = owed_detail.objects.get( id = delete_owed_detail)
+        delete_ow_detail.delete()
+        return redirect('owed_detail')
+    
+
     context = {
         'owed':owed
     }
     return render(request , 'admin_panel/owed_dital.html'  , context)
 def profit_details(request):
+    delete_profit_detail = request.POST.get('delete')
+    if request.method == 'POST' and delete_profit_detail:
+        delete_pro_detail = profit_detail.objects.get( id = delete_profit_detail)
+        delete_pro_detail.delete()
+        return redirect('profit_detail')
     detail = profit_detail.objects.all()
     context = {
         'detail':detail
@@ -402,3 +419,5 @@ def update_profit_detail(request , id ):
     }
 
     return render(request , 'admin_panel/detail/update_profit.html' , context)
+def f(request):
+    return render(request , 'admin_panel/f.html' )

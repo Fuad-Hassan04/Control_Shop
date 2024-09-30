@@ -430,11 +430,14 @@
                                             <a href="{% url 'update_customer_detail' details.id %}">
                                                 <button class="btn btn-primary mb-2 me-2" style="padding: 2px 5px; font-size: 12px;">Edit</button>
                                             </a>  
-                                            -- 
-                                           
-                                            <button class="btn btn-danger mb-2 me-2" style="padding: 2px 5px; font-size: 12px;" data-bs-toggle="modal" data-bs-target="#deleteModal" >
-                                                Delete
-                                            </button>
+
+                                            <form method="POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="delete" id="delete" value="{{details.id}}">
+                                                <button class="btn btn-danger mb-2 me-2" style="padding: 2px 5px; font-size: 12px;"  data-id="{{ details.id }}">
+                                                    Delete
+                                                </button>
+                                               </form>
                                             
                                         </span>
                                     </td>
